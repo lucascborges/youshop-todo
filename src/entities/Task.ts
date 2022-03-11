@@ -1,4 +1,5 @@
 import moment from "moment";
+import TaskEntity from "./Task.entity";
 
 const { v4: uuidv4 } = require("uuid");
 
@@ -6,7 +7,8 @@ class Task {
   private constructor(
     title: string,
     description: string,
-    estimateFinalisationDate: Date | null = null
+    estimateFinalisationDate: Date | null = null,
+    priority: number
   ) {
     this._title = title;
     this._description = description;
@@ -15,12 +17,23 @@ class Task {
     this._realFinalisationDate = null;
     this._updatedAt = null;
     this._uuid = uuidv4();
+    this._priority = priority;
   }
 
   private _uuid: string;
 
   get uuid(): string {
     return this._uuid;
+  }
+
+  private _priority: number;
+
+  get priority(): number {
+    return this._priority;
+  }
+
+  set priority(value: number) {
+    this._priority = value;
   }
 
   private _title: string;
@@ -88,12 +101,26 @@ class Task {
   static create(
     title: string,
     description: string,
-    estimateFinalizationDate: Date | null = null
+    estimateFinalizationDate: Date | null = null,
+    priority: number
   ) {
     if (!title || title.length < 3) {
       throw new Error("O campo titulo deve possuir 3 ou mais caracteres.");
     }
-    return new Task(title, description, estimateFinalizationDate);
+    const taskInstance = new Task(
+      title,
+      description,
+      estimateFinalizationDate,
+      priority
+    );
+    const returnTask: TaskEntity = new TaskEntity(
+      taskInstance.title,
+      taskInstance.description,
+      taskInstance.estimateFinalisationDate,
+      taskInstance.priority
+    );
+
+    return returnTask;
   }
 
   isExpired(): boolean {
@@ -112,8 +139,8 @@ class Task {
   }
 
   isClosed(): boolean {
-    if (this._realFinalisationDate) {
-      return false;
+    if (this.realFinalisationDate) {
+      return true;
     }
     return false;
   }

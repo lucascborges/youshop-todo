@@ -1,6 +1,5 @@
 import store from "./index";
 import faker from "@faker-js/faker";
-import TaskEntity from "../entities/Task";
 import Task from "../entities/Task";
 import moment from "moment";
 
@@ -8,10 +7,11 @@ test("Sumarize tasks", () => {
   const today = new Date();
   const tasks = [];
   for (let i = 0; i < 25; i++) {
-    const newTask = TaskEntity.create(
+    const newTask = Task.create(
       faker.company.bs(),
       faker.lorem.paragraph(),
-      today
+      today,
+      3
     );
     tasks.push(newTask);
   }

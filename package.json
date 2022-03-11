@@ -1,5 +1,5 @@
 {
-  "name": "task-list-youshop",
+  "name": "YouShop-ToDo-List",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,7 +17,8 @@
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.5.1",
     "vuetify": "^2.6.0",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "vuex-persist": "^3.1.3"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
@@ -65,6 +66,7 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testURL": "http://localhost/",
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$"
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testEnvironment": "jsdom"
   }
 }

@@ -5,21 +5,21 @@ const { faker } = require("@faker-js/faker");
 describe("Task Test", () => {
   test("Test instance validation", () => {
     expect(() => {
-      Task.create("N", "Descricao", new Date());
+      Task.create("N", "Descricao", new Date(), 3);
     }).toThrow();
   });
   test("Test create instance", () => {
     const title = faker.company.bs();
     const description = faker.lorem.paragraph();
     const estimateFinalizationDate = faker.date.soon(90);
-    const task = Task.create(title, description, estimateFinalizationDate);
+    const task = Task.create(title, description, estimateFinalizationDate, 3);
     expect(task.title).toBe(title);
   });
   test("Test set real finalize task", () => {
     const title = faker.company.bs();
     const description = faker.lorem.paragraph();
     const estimateFinalizationDate = faker.date.soon(10);
-    const task = Task.create(title, description, estimateFinalizationDate);
+    const task = Task.create(title, description, estimateFinalizationDate, 3);
     expect(() => {
       task.realFinalisationDate = faker.date.recent(10);
     }).toThrow();
@@ -28,7 +28,7 @@ describe("Task Test", () => {
     const title = faker.company.bs();
     const description = faker.lorem.paragraph();
     const estimateFinalizationDate = faker.date.soon(10);
-    const task = Task.create(title, description, estimateFinalizationDate);
+    const task = Task.create(title, description, estimateFinalizationDate, 3);
     expect(() => {
       task.estimateFinalisationDate = faker.date.recent(10);
     }).toThrow();
